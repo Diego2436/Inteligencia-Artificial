@@ -1,4 +1,5 @@
 import heapq
+import time
 
 # Implementación de Cola de Prioridad (usada en A*)
 class ColaPrioridad:
@@ -64,21 +65,65 @@ class LaberintoAStar:
         
         return None
 
-# Representación del laberinto
-maze = [
+# Representación del laberinto 1
+maze_1 = [
     [1, 0, 1, 1, 1],
     [1, 0, 0, 0, 1],
     [1, 1, 1, 0, 1],
     [1, 0, 0, 0, 0],
     [1, 1, 1, 1, 1]
 ]
-start = (0, 1)
-end = (3, 4)
+start_maze_1 = (0, 1)
+end_maze_1 = (3, 4)
 
-laberinto_solver = LaberintoAStar(maze, start, end)
-camino = laberinto_solver.a_star()
+# Representación del laberinto 2
+maze_2 = [
+    [1, 0, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 1, 0, 1, 1, 1],
+    [1, 1, 1, 0, 1, 0, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 0, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 0, 1, 1, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1]
+]
 
-if camino:
-    print("¡Camino encontrado con A*!: ", camino)
+start_maze_2 = (0, 1)
+end_maze_2 = (8, 8)
+
+# Resolviendo el laberinto 1
+inicio_tiempo_maze_1 = time.time()
+
+laberinto_solver_1 = LaberintoAStar(maze_1, start_maze_1, end_maze_1)
+camino_maze_1 = laberinto_solver_1.a_star()
+
+fin_tiempo_maze_1 = time.time()
+
+if camino_maze_1:
+    print("¡Camino encontrado con A* para el laberinto 1!: ", camino_maze_1)
 else:
     print("No hay camino posible.")
+
+# Resolviendo el laberinto 2
+inicio_tiempo_maze_2 = time.time()
+
+laberinto_solver_2 = LaberintoAStar(maze_2, start_maze_2, end_maze_2)
+camino_maze_2 = laberinto_solver_2.a_star()
+
+fin_tiempo_maze_2 = time.time()
+
+if camino_maze_2:
+    print("¡Camino encontrado con A* para el laberinto 2!: ", camino_maze_2)
+else:
+    print("No hay camino posible.")
+
+# Tiempos de cada laberinto
+tiempo_total_maze_1 = fin_tiempo_maze_1 - inicio_tiempo_maze_1
+tiempo_total_maze_2 = fin_tiempo_maze_2 - inicio_tiempo_maze_2
+
+
+print(f"El laberinto 1 se resolvió en {tiempo_total_maze_1:.10f}ms.")
+print(f"El laberinto 2 se resolvió en {tiempo_total_maze_2:.10f}ms.")
